@@ -40,6 +40,7 @@ module.exports = function toReadable (number) {
 
     let hundreds = `${ones[firstSign]} ${'hundred'}`
     let dozens = lastSigns % 10 === 0 ? `${tens[middleSign]}` : `${tens[middleSign]} ${ones[lastSign]}`;
+    let oneToNineteen = middleSign === '0' ? ones[lastSign] : ones[lastSigns];
 
     if (number < 20) {
         return ones[number];
@@ -50,7 +51,6 @@ module.exports = function toReadable (number) {
     } else if (number < 1000 && number % 100 === 0) {
         return hundreds;
     } else if (number < 1000 && number % 100 !== 0) {
-        return `${hundreds} ${middleSign === '0' ? ones[lastSign] 
-            : middleSign === '1' ? ones[lastSigns] : dozens}`;
+        return `${hundreds} ${oneToNineteen || dozens}`;
     }
 }
